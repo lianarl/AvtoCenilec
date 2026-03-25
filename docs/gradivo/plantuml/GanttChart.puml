@@ -1,0 +1,65 @@
+@startgantt "Ganttov diagram"
+printscale daily 
+saturdays are closed
+sundays are closed
+2026/04/06 is closed
+2026/04/27 is closed
+2026/05/01 is closed
+language sl
+
+
+Project Starts 2026-02-23
+
+[Upravljanje projekta] lasts 62 days and is colored in LimeGreen
+
+-- 1. iteracija --
+
+[Izbira ideje projekta] lasts 5 days and is colored in LightBlue
+[Določitev zahtev] lasts 3 days and is colored in LightBlue
+[Določitev vlog znotraj ekipe] lasts 1 days and is colored in LightBlue
+[Določitev ciljev, opisa sistema, predlaganega pristopa] lasts 5 days and is colored in LightBlue
+[Izdelava projektnega in finančnega načrta] lasts 6 days and is colored in LightBlue
+[Identifikacija tveganj, doloćanje strategij za obvladovanje tveganj] lasts 5 days and is colored in LightBlue
+[Revizija predloga projekta] lasts 1 days and is colored in LightBlue
+[Oddaja predloga projekta] lasts 1 days and is colored in LightBlue
+
+
+[Izbira ideje projekta] -[#red,bold]-> [Določitev zahtev]
+
+[Določitev zahtev] -> [Določitev ciljev, opisa sistema, predlaganega pristopa]
+
+[Izbira ideje projekta] -> [Določitev vlog znotraj ekipe]
+
+[Določitev zahtev] -[#red,bold]-> [Izdelava projektnega in finančnega načrta]
+
+[Določitev zahtev] -> [Identifikacija tveganj, doloćanje strategij za obvladovanje tveganj]
+
+[Določitev ciljev, opisa sistema, predlaganega pristopa] -> [Revizija predloga projekta]
+[Določitev vlog znotraj ekipe] -> [Revizija predloga projekta]
+[Izdelava projektnega in finančnega načrta] -[#red,bold]-> [Revizija predloga projekta]
+[Identifikacija tveganj, doloćanje strategij za obvladovanje tveganj] -> [Revizija predloga projekta]
+
+[Revizija predloga projekta] -[#red,bold]-> [Oddaja predloga projekta]
+
+-- 2. iteracija --
+
+[Izvedba 2. iteracije] lasts 14 days and is colored in SteelBlue
+
+[Oddaja predloga projekta] -[#red,bold]-> [Izvedba 2. iteracije]
+
+-- 3. iteracija --
+
+[Izvedba 3. iteracije] lasts 18 days and is colored in MediumPurple
+
+[Izvedba 2. iteracije] -[#red,bold]-> [Izvedba 3. iteracije]
+
+-- 4. iteracija --
+
+[Izvedba 4. iteracije] lasts 14 days and is colored in IndianRed
+
+[Izvedba 3. iteracije] -[#red,bold]-> [Izvedba 4. iteracije]
+
+[Oddaja končnega projekta] happens 2026-05-25
+[Izvedba 4. iteracije] -[#red,bold]-> [Oddaja končnega projekta]
+
+@endgantt

@@ -1,0 +1,43 @@
+@startuml "PERT diagram"
+
+
+left to right direction
+
+scale 0.8
+
+skinparam defaultTextAlignment center
+
+state "A1" as A1 #F8F9F9 : <#F8F9F9,#F8F9F9>|  62 | 0 | 62 |\n|   0 | 0 | 62 |
+state "<color:darkred>A2</color>" as A2 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|   5 | 0 | 5 |\n|   0 | 0 | 5 |
+state "<color:darkred>A3</color>" as A3 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|   3 | 5 | 8 |\n|   0 | 5 | 8 |
+state "A4" as A4 #F8F9F9 : <#F8F9F9,#F8F9F9>|   1 | 5 | 6 |\n|   8 | 13 | 14 |
+state "A5" as A5 #F8F9F9 : <#F8F9F9,#F8F9F9>|   5 | 8 | 13 |\n|   1 | 9 | 14 |
+state "<color:darkred>A6</color>" as A6 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|   6 | 8 | 14 |\n|   0 | 8 | 14 |
+state "A7" as A7 #F8F9F9 : <#F8F9F9,#F8F9F9>|   5 | 8 | 13 |\n|   1 | 9 | 14 |
+state "<color:darkred>A8</color>" as A8 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|   1 | 14 | 15 |\n|   0 | 14 | 15 |
+state "<color:darkred>A9</color>" as A9 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|   1 | 15 | 16 |\n|   0 | 15 | 16 |
+state "<color:darkred>A10</color>" as A10 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|  14 | 16 | 30 |\n|   0 | 16 | 30 |
+state "<color:darkred>A11</color>" as A11 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|  18 | 30 | 48 |\n|   0 | 30 | 48 |
+state "<color:darkred>A12</color>" as A12 #ffe6e6;line:darkred : <#ffe6e6,#ffe6e6>|  14 | 48 | 62 |\n|   0 | 48 | 62 |
+
+
+[*] --> A1
+[*] -[#darkred,bold]-> A2
+A2 -[#darkred,bold]-> A3
+A12 -[#darkred,bold]-> [*]
+A2 --> A4
+A3 --> A5
+A3 -[#darkred,bold]-> A6
+A3 --> A7
+A4 --> A8
+A5 --> A8
+A6 -[#darkred,bold]-> A8
+A7 --> A8
+A8 -[#darkred,bold]-> A9
+A9 -[#darkred,bold]-> A10
+A10 -[#darkred,bold]-> A11
+A11 -[#darkred,bold]-> A12
+
+
+
+@enduml
