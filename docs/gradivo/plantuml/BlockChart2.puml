@@ -1,0 +1,87 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontSize 12
+skinparam rectangle {
+  roundCorner 10
+}
+
+title Sistem AvtoCenilec
+
+legend right
+  |= Barva |= Pomen |
+  | <#90EE90> | Implementirano |
+  | <#FFD700> | Delno implementirano |
+  | <#D3D3D3> | Še ni implementirano |
+endlegend
+
+actor "Uporabnik\n(kupec/prodajalec)" as user
+actor "Administrator\n(razvijalec)" as admin
+
+package "Frontend" as frontend #FFD700 {
+  rectangle "Obrazec za vnos\npodatkov o vozilu\n(PU-02)" as form #90EE90
+  rectangle "Preverjanje vnosa\n(osnovna validacija)\n(PU-03)" as validation #90EE90
+  rectangle "Testni izračun\n(nadomestek za model)" as mock_calc #90EE90
+  rectangle "Prikaz testnega\nrezultata ocene\n(PU-05)" as results #90EE90
+  rectangle "Ponastavitev\nobrazca\n(PU-08)" as reset #90EE90
+  rectangle "Prikaz cenovnega\nrazpona\n(PU-06)" as range #FFD700
+  rectangle "Prikaz vplivnih\ndejavnikov\n(PU-07)" as factors #FFD700
+  rectangle "Obrazec za prijavo\nin registracijo\n(PU-01)" as auth_ui #FFD700
+  rectangle "Pregled preteklih\niskanj\n(PU-11)" as history_ui #FFD700
+  rectangle "Primerjava\nmed avtomobili\n(PU-12)" as compare_ui #D3D3D3
+}
+
+package "Zaledni strežnik" as backend #D3D3D3 {
+  rectangle "API za sprejem\nzahtev" as api #D3D3D3
+  rectangle "Obdelava podatkov\nin posredovanje modelu" as processing #D3D3D3
+  rectangle "Avtentikacija\nuporabnikov" as auth_backend #D3D3D3
+}
+
+package "Model za napovedovanje" as ml #D3D3D3 {
+  rectangle "Linearni regresijski\nmodel" as model #D3D3D3
+}
+
+database "Podatkovna baza\n(uporabniki, iskanja)" as db #D3D3D3
+
+package "Priprava podatkov" as data_prep #FFD700 {
+  rectangle "Analiza podatkovne\nzbirke\n(PU-09)" as analysis #90EE90
+  rectangle "Čiščenje in\npriprava podatkov\n(PU-09)" as cleaning #D3D3D3
+  rectangle "Učenje modela\n(PU-10)" as training #D3D3D3
+}
+
+database "Javna podatkovna\nzbirka\n(nemški trg)" as external_db #90EE90
+
+user --> form : "vnos podatkov"
+user --> reset : "ponastavitev"
+user --> auth_ui : "prijava"
+user --> history_ui : "pregled iskanj"
+
+form --> validation : "preverjanje"
+validation --> mock_calc : "veljavni podatki"
+mock_calc --> results : "testni rezultat"
+mock_calc --> range : "testni razpon"
+mock_calc --> factors : "testni dejavniki"
+
+validation --> api : "pošiljanje\npodatkov"
+auth_ui --> auth_backend : "avtentikacija"
+history_ui --> db : "pridobivanje\npreteklih iskanj"
+
+api --> processing
+auth_backend --> db
+
+processing --> model : "podatki o vozilu"
+model --> processing : "ocena cene"
+
+processing --> results : "dejanski rezultat"
+processing --> range : "dejanski razpon"
+processing --> factors : "dejanski dejavniki"
+processing --> db : "shranjevanje iskanj"
+
+admin --> analysis : "pregled podatkov"
+admin --> cleaning : "čiščenje"
+admin --> training : "učenje modela"
+
+external_db --> analysis : "surovi podatki"
+external_db --> cleaning : "surovi podatki"
+cleaning --> training : "očiščeni podatki"
+training --> model : "naučen model"
+@enduml

@@ -1,0 +1,87 @@
+@startuml
+left to right direction
+
+
+
+
+actor "Gost" as Guest
+actor "Registriran uporabnik" as User
+actor Administrator
+
+
+
+
+
+
+
+
+rectangle "AvtoCenilec" {
+
+
+
+
+usecase "PU-01: Prijava v sistem" as UC1
+usecase "PU-02: Vnos osnovnih podatkov o avtomobilu" as UC2
+usecase "PU-03: Preverjanje pravilnosti vnosa" as UC3
+usecase "PU-04: Izračun ocene cene avtomobila z modelom" as UC4
+usecase "PU-05: Prikaz ocenjene cene avtomobila" as UC5
+usecase "PU-06: Prikaz cenovnega razpona" as UC6
+usecase "PU-07: Izpis najbolj vplivnih dejavnikov" as UC7
+usecase "PU-08: Ponastavitev obrazca za vnos podatkov o avtomobilu" as UC8
+usecase "PU-09: Priprava podatkov za učenje modela" as UC9
+usecase "PU-10: Učenje modela za napovedovanje cen" as UC10
+usecase "PU-11: Shranjevanje preteklih iskanj" as UC12
+usecase "PU-12: Primerjava med avtomobili" as UC13
+
+
+
+
+}
+
+
+
+
+actor "Javna podatkovna baza vozil" as Dataset
+
+
+
+
+User -up-|> Guest
+Administrator -up-|> User
+
+
+
+
+User --> UC1
+Guest --> UC2
+Guest --> UC5
+Guest --> UC8
+
+
+
+
+User --> UC12
+User --> UC13
+
+
+
+
+Administrator --> UC9
+Administrator --> UC10
+
+
+
+
+
+
+UC9 --> Dataset
+
+
+
+
+UC2 .> UC3 : <<include>>
+UC5 .> UC4 : <<include>>
+UC6 .> UC5 : <<extend>>
+UC7 .> UC5 : <<extend>>
+@enduml
+
